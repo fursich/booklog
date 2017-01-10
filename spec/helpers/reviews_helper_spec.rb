@@ -11,5 +11,20 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe ReviewsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe 'review_average' do
+    it 'レビューがない場合は､0を返す' do
+      expect(review_average([])).to eq 0
+    end
+    it 'レビューがある場合は､その平均点を返す' do
+      expect(review_average([create(:review, rank: 2), create(:review, rank: 4)])).to eq 3
+    end
+    it 'レビューがある場合は､その平均点を返す(小数点あり)' do
+      expect(review_average([create(:review, rank: 3), create(:review, rank: 4)])).to eq 3.5
+    end
+    it 'レビューの平均点は小数点第二位までで四捨五入される' do
+      expect(review_average([create(:review, rank: 3),create(:review, rank: 3), create(:review, rank: 5)])).to eq 3.67
+    end
+  end
+
 end
