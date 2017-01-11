@@ -9,6 +9,7 @@ ja:
         price: '価格'
         publish_date: '刊行日'
         caption: '説明'
+        categories: 'カテゴリー'
         image: 'book画像'
       review:
         user_id: '投稿者'

@@ -39,6 +39,16 @@
       <%= f.label :publish_date %><br />
       <%= f.date_field :publish_date, class: 'form-control' %>
     </div>
+
+    <div class = 'form-group'>
+      <%= f.label :categories %> <br />
+      <div class = 'checkbox category_checkbox'>
+      <%= collection_check_boxes(:book, :category_ids, Category.all, :id, :label) do |b| %>
+        <%= b.label {b.check_box + b.text } %>
+      <% end %>
+      </div>
+    </div>
+    
     <div class = 'form-group'>
       <%= f.label :caption %><br />
       <%= f.text_area :caption, class: 'form-control' %>

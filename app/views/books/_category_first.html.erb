@@ -1,0 +1,11 @@
+
+<%
+  book = nil if book.nil?
+%>
+
+<% if book && !book.categories.empty? %>
+    <%= book.categories.order('category_id ASC').first.label %>
+    <%= "..." if (book.categories.count >= 2) %>
+<% end %>
+
+

@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <div class = 'col-sm-8'>
+    <div class = 'col-sm-8 book-details'>
       <div class = 'author'>
         <%= label :book, :author %>: <%= @book.author %>
       </div>
@@ -66,6 +66,9 @@
         <div class = 'bookmark'>
           <%= render 'books/info', book: @book %>
         </div>
+      <div class = 'category'>
+        <%= render 'books/category_all', book: @book %>
+      </div>
       </div>
 
     </div>

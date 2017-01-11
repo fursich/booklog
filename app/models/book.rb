@@ -1,5 +1,6 @@
 class Book < ActiveRecord::Base
   belongs_to :user
+  has_and_belongs_to_many :categories
   has_many  :bookmarks
   has_many  :reviews
   mount_uploader :image, BookImageUploader

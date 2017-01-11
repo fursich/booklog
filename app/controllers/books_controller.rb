@@ -3,13 +3,24 @@ class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
+
     if user_signed_in? && params[:ft] && params[:ft]=='my'
       @books = Book.includes(:bookmarks, :reviews, :user).where(user_id: current_user.id).order('updated_at DESC')
+      @opt1 = 'my'
     elsif user_signed_in? && params[:ft] && params[:ft]=='bookmark'
       @books = Book.joins(:bookmarks).where('bookmarks.user_id = ?', current_user.id).order('updated_at DESC')
+      @opt1 = 'bookmark'
     else
       @books = Book.includes(:bookmarks, :reviews, :user).order('updated_at DESC')
+      @opt1 = 'all'
     end
+
+    if !params[:ct].blank?
+      @books = @books.joins(:categories).where('category_id = ?',params[:ct])
+      @category = Category.find(params[:ct])
+      @opt2 = params[:ct]
+    end
+    @categories = Category.all
 
   end
 
@@ -26,11 +37,11 @@ class BooksController < ApplicationController
         @my_review = Review.new
       end
     end
-
   end
   
   def new
     @book = Book.new
+    @categories = Category.all
   end
 
   def create
@@ -49,6 +60,7 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    @categories = Category.all
   end
 
   def update
@@ -74,6 +86,6 @@ class BooksController < ApplicationController
 
 private
   def input_params
-    params.require(:book).permit(:title, :author, :publisher, :price, :publish_date, :caption, :image)
+    params.require(:book).permit(:title, :author, :publisher, :price, :publish_date, :caption, :image, {:category_ids=>[]})
   end
 end
