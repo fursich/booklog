@@ -8,15 +8,31 @@
   <%= render 'books/social_buttons', url: request.url %>
 
   <hr>
+
   
   <% if user_signed_in? %>
     <div class = 'filter'>
       <div <%= 'class = bold' unless params[:ft] %> ><%= link_to '全て', root_path %></div>
-      <div <%= 'class = bold' if params[:ft] && params[:ft]=='my' %> ><%= link_to '登録したbook', root_path(ft: 'my') %></div>
-      <div <%= 'class = bold' if params[:ft] && params[:ft]=='bookmark' %> ><%= link_to 'ブックマーク', root_path(ft: 'bookmark') %></div>
+      <div <%= 'class = bold' if params[:ft] && params[:ft]=='my' %> ><%= link_to '登録したbook', root_path(ft: 'my', ct: @opt2) %></div>
+      <div <%= 'class = bold' if params[:ft] && params[:ft]=='bookmark' %> ><%= link_to 'ブックマーク', root_path(ft: 'bookmark', ct: @opt2) %></div>
     </div>
     <hr>
   <% end %>
+
+  <div class = 'category-area clearfix' %>
+    <% @categories.each do |category| %>
+      <% if params[:ct] && params[:ct] == category.id.to_s %>
+        <div class = 'category-tag selected'>
+          <%= link_to category.label, root_path(ft: @opt1) %>
+        </div>
+      <% else %>
+        <div class = 'category-tag'>
+          <%= link_to category.label, root_path(ft: @opt1, ct: category.id) %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <hr>
   
   <div>
     <%= button_to 'bookを登録', new_book_path, method: :get, class: 'btn btn-primary' %>

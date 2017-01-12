@@ -7,6 +7,7 @@ div.wrapper.book_index, div.wrapper.book_show {
   width: 1000px;
 
   div.header {
+    margin-top: 50px;
     text-align: center;
     font-size: 24px;
   }
@@ -26,17 +27,51 @@ div.wrapper.book_index, div.wrapper.book_show {
   hr.bold {
     border-top: 3px solid;
   }
-
 }
 
 div.wrapper.book_index {
+  div.category-area {
+    div.category-tag {
+      float: left;
+      margin-bottom: 1px;
+      // padding: 0;
+      border: 1px solid #ddd;
+      padding: 7px 5px;
+      a {
+        font-size: 75%;
+        padding: 8px 7px;
+      }
+      a:link {
+        color: #666;
+      }
+      a:visited {
+        color: #666;
+      }
+    }
+
+    div.category-tag.selected {
+      margin-bottom: 0;
+      border-bottom: 2px solid #0dd;
+      a {
+        color: #0ac;
+        font-weight: bold;
+      }
+    }
+
+    div.category-tag a:hover {
+      color: #444;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+
   ul.grid_wrapper {
     margin-top: 20px;
     margin-bottom: 10px;
     padding: 0;
     li.grid {
       width: 230px;
-      height: 380px;
+      height: 390px;
       margin: 5px;
       background-color: antiquewhite;
       list-style: none;
@@ -68,10 +103,14 @@ div.wrapper.book_index {
         padding-right: 5px;
       }
       div.info {
-        height: 22px;
+        height: 30px;
         margin-left: 7px;
         margin-right: 7px;
         margin-bottom: 10px;
+        div.category {
+          font-size: 50%;
+          color: #333;
+        }
       }
     }
   }
@@ -118,7 +157,26 @@ div.wrapper.book_show {
       }
     }
   }
-  // 下記追加
+  .book-details {
+    .info {
+      margin-top: 10px;
+      .bookmark {
+        font-size: 95%;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 3px;
+      }
+      .category {
+        font-size: 80%;
+        color: #999;
+        .category-label {
+          padding: 2px 10px;
+          border: 1px solid #ccc;
+          border-radius: 2px;
+        }
+      }
+    }
+  }
   div.my_review_wrapper {
     margin-top: 20px;
     div.footer_menu {
