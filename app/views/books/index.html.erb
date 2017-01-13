@@ -1,8 +1,8 @@
 
-<div class = 'wrapper book_index'>
+<div class='wrapper book_index'>
 
-  <hr class = 'bold'>
-  <div class = 'header'>
+  <hr class='bold'>
+  <div class='header'>
     Bookリスト
   </div>
   <%= render 'books/social_buttons', url: request.url %>
@@ -11,22 +11,22 @@
 
   
   <% if user_signed_in? %>
-    <div class = 'filter'>
-      <div <%= 'class = bold' unless params[:ft] %> ><%= link_to '全て', root_path %></div>
-      <div <%= 'class = bold' if params[:ft] && params[:ft]=='my' %> ><%= link_to '登録したbook', root_path(ft: 'my', ct: @opt2) %></div>
-      <div <%= 'class = bold' if params[:ft] && params[:ft]=='bookmark' %> ><%= link_to 'ブックマーク', root_path(ft: 'bookmark', ct: @opt2) %></div>
+    <div class='filter'>
+      <div <%= 'class=bold' unless params[:ft] %> ><%= link_to '全て', root_path %></div>
+      <div <%= 'class=bold' if params[:ft]=='my' %> ><%= link_to '登録したbook', root_path(ft: 'my', ct: @opt2) %></div>
+      <div <%= 'class=bold' if params[:ft]=='bookmark' %> ><%= link_to 'ブックマーク', root_path(ft: 'bookmark', ct: @opt2) %></div>
     </div>
     <hr>
   <% end %>
 
-  <div class = 'category-area clearfix' %>
+  <div class='category-area clearfix' %>
     <% @categories.each do |category| %>
       <% if params[:ct] && params[:ct] == category.id.to_s %>
-        <div class = 'category-tag selected'>
+        <div class='category-tag selected'>
           <%= link_to category.label, root_path(ft: @opt1) %>
         </div>
       <% else %>
-        <div class = 'category-tag'>
+        <div class='category-tag'>
           <%= link_to category.label, root_path(ft: @opt1, ct: category.id) %>
         </div>
       <% end %>
@@ -39,7 +39,7 @@
   </div>
 
 
-  <ul class = 'grid_wrapper clearfix'>
+  <ul class='grid_wrapper clearfix'>
     <% @books.each do |book| %>
       <%= render 'books/grid', book: book %>
     <% end %>
