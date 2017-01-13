@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_book, only: [:show, :edit, :update, :destroy]
 
   def index
 
@@ -15,7 +16,7 @@ class BooksController < ApplicationController
       @opt1 = 'all'
     end
 
-    if !params[:ct].blank?
+    if params[:ct].present?
       @books = @books.joins(:categories).where('category_id = ?',params[:ct])
       @category = Category.find(params[:ct])
       @opt2 = params[:ct]
@@ -25,8 +26,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
-
     if user_signed_in?
       @my_bookmark = @book.bookmarks.select{|s| s.user_id == current_user.id}.first
     end
@@ -59,12 +58,10 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:id])
     @categories = Category.all
   end
 
   def update
-    @book = Book.find(params[:id])
     @book.attributes = input_params
     @book.user_id = current_user.id
     if @book.valid?
@@ -77,7 +74,6 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book = Book.find(params[:id])
     @book.destroy!
     flash[:notice] = I18n.t('book.deleted')
     redirect_to action: :index
@@ -87,5 +83,8 @@ class BooksController < ApplicationController
 private
   def input_params
     params.require(:book).permit(:title, :author, :publisher, :price, :publish_date, :caption, :image, {:category_ids=>[]})
+  end
+  def find_book
+    @book = Book.find(params[:id])
   end
 end

@@ -1,11 +1,7 @@
 
-<%
-  book = nil if book.nil?
-%>
-
-<% if book && !book.categories.empty? %>
+<% if book.present? %>
   <% book.categories.order('category_id ASC').each do |category| %>
-    <span class = 'category-label'><%= category.label %></span>
+    <span class='category-label'><%= category.label %></span>
   <% end %>
 <% end %>
 

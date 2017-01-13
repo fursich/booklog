@@ -1,9 +1,5 @@
 
-<%
-  book = nil if book.nil?
-%>
-
-<% if book %>
+<% if book.present? %>
 
   ♥ <%= book.bookmarks.length %>   💬 <%= book.reviews.length %>   ★ <%= review_average(book.reviews) %>
 

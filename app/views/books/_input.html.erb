@@ -1,7 +1,7 @@
 
 
-<div class = 'wrapper book_input'>
-  <div class = 'header'>
+<div class='wrapper book_input'>
+  <div class='header'>
     <%= link_to 'bookリストに戻る', root_path %>
   </div>
 
@@ -12,55 +12,55 @@
   <%= form_for @book do |f| %>
   
     <% if @book.errors.any? %>
-      <div class = 'alert alert-danger'>
+      <div class='alert alert-danger'>
         <% @book.errors.full_messages.each do |message| %>
-          <p class = 'alert'><%= message %></p>
+          <p class='alert'><%= message %></p>
         <% end %>
       </div>
     <% end %>
 
-    <div class = 'form-group'>
+    <div class='form-group'>
       <%= f.label :title %><br />
       <%= f.text_field :title, autofocus: true, class: 'form-control' %>
     </div>
-    <div class = 'form-group'>
+    <div class='form-group'>
       <%= f.label :author %><br />
       <%= f.text_field :author, class: 'form-control' %>
     </div>
-    <div class = 'form-group'>
+    <div class='form-group'>
       <%= f.label :publisher %><br />
       <%= f.text_field :publisher, class: 'form-control' %>
     </div>
-    <div class = 'form-group'>
+    <div class='form-group'>
       <%= f.label :price %><br />
       <%= f.number_field :price, class: 'form-control' %>
     </div>
-    <div class = 'form-group'>
+    <div class='form-group'>
       <%= f.label :publish_date %><br />
       <%= f.date_field :publish_date, class: 'form-control' %>
     </div>
 
-    <div class = 'form-group'>
+    <div class='form-group'>
       <%= f.label :categories %> <br />
-      <div class = 'checkbox category_checkbox'>
+      <div class='checkbox category_checkbox'>
       <%= collection_check_boxes(:book, :category_ids, Category.all, :id, :label) do |b| %>
         <%= b.label {b.check_box + b.text } %>
       <% end %>
       </div>
     </div>
     
-    <div class = 'form-group'>
+    <div class='form-group'>
       <%= f.label :caption %><br />
       <%= f.text_area :caption, class: 'form-control' %>
     </div>
 
-    <div class = 'form-group'>
+    <div class='form-group'>
       <%= f.label :image %><br />
       <%= f.file_field :image %>
       <%= f.hidden_field :image_cache %>
     </div>
 
-    <div class = 'actions'>
+    <div class='actions'>
       <%= f.submit '登録', class: 'btn btn-primary' %>
     </div>
 

@@ -1,32 +1,28 @@
 
-<%
-  book = nil if book.nil?
-%>
-  
-<li class = 'grid'>
-  <% if book %>
+<li class='grid'>
+  <% if book.present? %>
     <%= link_to book_path(book.id) do %>
-      <div class = 'image'>
+      <div class='image'>
         <% if book.image? %>
           <%= image_tag book.image.url %>
         <% else %>
-          <div class = 'empty'>NO IMAGE</div>
+          <div class='empty'>NO IMAGE</div>
         <% end %>
       </div>
     <% end %>
 
-    <div class = 'title'>
+    <div class='title'>
       <%= book.title %>
     </div>
-    <div class = 'info'>
-      <div class = 'bookmark'>
+    <div class='info'>
+      <div class='bookmark'>
         <%= render 'books/info', book: book %>
       </div>
-      <div class = 'category'>
+      <div class='category'>
         <%= render 'books/category_first', book: book %>
       </div>
     </div>
-    <div class = 'grid_footer'>
+    <div class='grid_footer'>
       <%= render 'books/social_buttons', url: book_url(book.id) %>
     </div>
   <% end %>
